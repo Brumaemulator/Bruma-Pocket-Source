@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="art_cancelled">下载已取消</string><string name="art_invalid">封面响应无效</string><string name="art_network">封面服务不可用</string><string name="art_not_found">未找到匹配封面</string></resources>

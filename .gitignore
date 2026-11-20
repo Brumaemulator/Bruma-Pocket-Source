@@ -1,0 +1,13 @@
+.gradle/
+.kotlin/
+**/build/
+**/.cxx/
+local.properties
+*.jks
+*.keystore
+private-signing/
+qa/
+qa-*.log
+qa-*.pid
+qa-*.elf
+app/src/androidTest/assets/fixtures/

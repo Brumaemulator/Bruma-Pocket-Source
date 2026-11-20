@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="art_cancelled">Téléchargement annulé</string><string name="art_invalid">Réponse de jaquette invalide</string><string name="art_network">Service de jaquettes indisponible</string><string name="art_not_found">Aucune jaquette correspondante</string></resources>

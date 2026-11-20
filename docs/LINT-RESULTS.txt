@@ -1,0 +1,172 @@
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\build.gradle.kts:5: Warning: Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details. [OldTargetApi]
+ defaultConfig { applicationId = "com.brumastudio.pocket"; minSdk = 26; targetSdk = 36; versionCode = 1; versionName = "0.1.0"; testInstrumentationRunner = "com.brumastudio.pocket.PocketChecks"; ndk { abiFilters += (providers.gradleProperty("pocketAbis").orNull ?: "arm64-v8a").split(",") } }
+                                                                        ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "OldTargetApi":
+   When your application or sdk runs on a version of Android that is more
+   recent than your targetSdk specifies that it has been tested with, various
+   compatibility modes kick in. This ensures that your application continues
+   to work, but it may look out of place. For example, if the targetSdk is
+   less than 14, your app may get an option button in the UI.
+
+   To fix this issue, set the targetSdk to the highest available value. Then
+   test your app to make sure everything works correctly. You may want to
+   consult the compatibility notes to see what changes apply to each version
+   you are adding support for:
+   https://developer.android.com/reference/android/os/Build.VERSION_CODES.html
+   as well as follow this guide:
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.
+   html
+
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.html
+
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\src\main\AndroidManifest.xml:5: Warning: Attribute enableOnBackInvokedCallback is only used in API level 33 and higher (current min is 26) [UnusedAttribute]
+<application android:enableOnBackInvokedCallback="false" android:localeConfig="@xml/pocket_locales" android:label="@string/app_name" android:icon="@drawable/pocket_icon" android:theme="@style/PocketTheme" android:allowBackup="false" android:fullBackupContent="false" android:dataExtractionRules="@xml/data_extraction_rules" android:supportsRtl="true" android:usesCleartextTraffic="false">
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\src\main\AndroidManifest.xml:5: Warning: Attribute localeConfig is only used in API level 33 and higher (current min is 26) [UnusedAttribute]
+<application android:enableOnBackInvokedCallback="false" android:localeConfig="@xml/pocket_locales" android:label="@string/app_name" android:icon="@drawable/pocket_icon" android:theme="@style/PocketTheme" android:allowBackup="false" android:fullBackupContent="false" android:dataExtractionRules="@xml/data_extraction_rules" android:supportsRtl="true" android:usesCleartextTraffic="false">
+                                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedAttribute":
+   This check finds attributes set in XML files that were introduced in a
+   version newer than the oldest version targeted by your application (with
+   the minSdkVersion attribute).
+
+   This is not an error; the application will simply ignore the attribute.
+   However, if the attribute is important to the appearance or functionality
+   of your application, you should consider finding an alternative way to
+   achieve the same result with only available attributes, and then you can
+   optionally create a copy of the layout in a layout-vNN folder which will be
+   used on API NN or higher where you can take advantage of the newer
+   attribute.
+
+   Note: This check does not only apply to attributes. For example, some tags
+   can be unused too, such as the new <tag> element in layouts introduced in
+   API 21.
+
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\build.gradle.kts:4: Warning: A newer version of compileSdk than 36 is available: 37 [GradleDependency]
+ compileSdk = 36
+ ~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\src\main\AndroidManifest.xml:8: Warning: Fixed screen orientations will be ignored in most cases, starting from Android 16. Android is moving toward a model where apps are expected to adapt to various orientations, display sizes, and aspect ratios. [DiscouragedApi]
+<activity android:name=".PlayerActivity" android:exported="false" android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" android:screenOrientation="user"/>
+                                                                                                                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "DiscouragedApi":
+   Discouraged APIs are allowed and are not deprecated, but they may be unfit
+   for common use (e.g. due to slow performance or subtle behavior).
+
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\src\main\res\values\strings.xml:15: Warning: Formatting %d followed by words ("games"): This should probably be a plural rather than a string [PluralsCandidate]
+<string name="library_count">%d games · stored in your folder</string>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\src\main\res\values\strings.xml:16: Warning: Formatting %d followed by words ("found"): This should probably be a plural rather than a string [PluralsCandidate]
+<string name="scanning">Discovering your games… %d found</string>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\src\main\res\values\strings.xml:33: Warning: Formatting %d followed by words ("covers"): This should probably be a plural rather than a string [PluralsCandidate]
+<string name="cover_result">%d covers downloaded</string>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "PluralsCandidate":
+   This lint check looks for potential errors in internationalization where
+   you have translated a message which involves a quantity and it looks like
+   other parts of the string may need grammatical changes.
+
+   For example, rather than something like this:
+     <string name="try_again">Try again in %d seconds.</string>
+   you should be using a plural:
+      <plurals name="try_again">
+           <item quantity="one">Try again in %d second</item>
+           <item quantity="other">Try again in %d seconds</item>
+       </plurals>
+   This will ensure that in other languages the right set of translations are
+   provided for the different quantity classes.
+
+   (This check depends on some heuristics, so it may not accurately determine
+   whether a string really should be a quantity. You can use tools:ignore to
+   filter out false positives.
+
+   https://developer.android.com/guide/topics/resources/string-resource.html#Plurals
+
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\build.gradle.kts:5: Warning: Missing x86_64 ABI support for ChromeOS [ChromeOsAbiSupport]
+ defaultConfig { applicationId = "com.brumastudio.pocket"; minSdk = 26; targetSdk = 36; versionCode = 1; versionName = "0.1.0"; testInstrumentationRunner = "com.brumastudio.pocket.PocketChecks"; ndk { abiFilters += (providers.gradleProperty("pocketAbis").orNull ?: "arm64-v8a").split(",") } }
+                                                                                                                                                                                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "ChromeOsAbiSupport":
+   To properly support ChromeOS, your Android application should have an x86
+   and/or x86_64 binary as part of the build configuration. To fix the issue,
+   ensure your files are properly optimized for ARM; the binary translator
+   will then ensure compatibility with x86. Alternatively, add an abiSplit for
+   x86 within your build.gradle file and create the required x86
+   dependencies.
+
+   https://developer.android.com/ndk/guides/abis
+
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\src\main\res\values\strings.xml:9: Warning: The resource R.string.recent appears to be unused [UnusedResources]
+<string name="recent">Recently played</string>
+        ~~~~~~~~~~~~~
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\src\main\res\values\strings.xml:60: Warning: The resource R.string.paused appears to be unused [UnusedResources]
+<string name="paused">Paused</string>
+        ~~~~~~~~~~~~~
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\src\main\res\values\strings.xml:68: Warning: The resource R.string.load_warning appears to be unused [UnusedResources]
+<string name="load_warning">Loading a state replaces the current game progress. Save current progress first?</string>
+        ~~~~~~~~~~~~~~~~~~~
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\src\main\res\values\strings.xml:72: Warning: The resource R.string.done_edit appears to be unused [UnusedResources]
+<string name="done_edit">Finish editing</string>
+        ~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests=true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests=true.
+
+   Available options:
+
+   **skip-libraries** (default is true):
+   Whether the unused resource check should skip reporting unused resources in libraries.
+
+   Many libraries will declare resources that are part of the library surface; other modules depending on the library will also reference the resources. To avoid reporting all these resources as unused (in the context of a library), the unused resource check normally skips reporting unused resources in libraries. Instead, run the unused resource check on the consuming app module (along with `checkDependencies=true`).
+
+   However, there are cases where you want to check that all the resources declared in a library are used; in that case, you can disable the skip option.
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UnusedResources">
+           <option name="skip-libraries" value="true" />
+       </issue>
+   </lint>
+   ```
+
+C:\Users\marce\.codex\.chatgpt-projects\g-p-6aa4ce9dc5308191a0cecb7d515dda3a\BrumaPocket\app\src\main\java\com\brumastudio\pocket\Ui.kt:47: Warning: Custom view PocketArt is missing constructor used by tools: (Context) or (Context,AttributeSet) or (Context,AttributeSet,int) [ViewConstructor]
+class PocketArt(c:Context,private val system:String):View(c){
+      ~~~~~~~~~
+
+   Explanation for issues of type "ViewConstructor":
+   Some layout tools (such as the Android layout editor) need to find a
+   constructor with one of the following signatures:
+   * View(Context context)
+   * View(Context context, AttributeSet attrs)
+   * View(Context context, AttributeSet attrs, int defStyle)
+
+   If your custom view needs to perform initialization which does not apply
+   when used in a layout editor, you can surround the given code with a check
+   to see if View#isInEditMode() is false, since that method will return false
+   at runtime but true within a user interface editor.
+
+0 errors, 14 warnings

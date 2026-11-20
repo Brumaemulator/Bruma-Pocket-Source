@@ -1,0 +1,30 @@
+{
+  "coverNetwork": "PASS: HTTPS catalog, matching and image decode; image discarded",
+  "status": "PASS",
+  "checks": [
+    "SAF scan, GB\/GBC\/GBA detection, nested ZIP and duplicate elimination",
+    "Library scan stores metadata only, no ROM copies",
+    "Repeated scan retains stable identity and no duplicate entries",
+    "GB: real frames\/audio, battery save, 5 state slots, state backup, source lease cleanup",
+    "GB: ZIP launch and save\/state continuity",
+    "GBA: real frames\/audio, battery save, 5 state slots, state backup, source lease cleanup",
+    "GBA: ZIP launch and save\/state continuity",
+    "GBC: real frames\/audio, battery save, 5 state slots, state backup, source lease cleanup",
+    "GBC: ZIP launch and save\/state continuity",
+    "Save export\/import and pre-import backup",
+    "Wrong-game backup rejected",
+    "Unsafe archive rejected before replacing saves",
+    "Tampered backup rejected by SHA-256 without changing saves",
+    "Canceled scan preserves the previous library",
+    "Favorites, recent history and play-time survive rescan",
+    "Touch A, cancellation and editing release input",
+    "Reused controller mapping, diagonal input and virtual-keyboard exclusion",
+    "Spanish\/English resources",
+    "Live optional cover provider: catalog, exact match and valid image; no artwork bundled",
+    "Large cover resized to 768px; invalid custom image preserves previous cover",
+    "Real player Activity launches and closes for GB\/GBC\/GBA",
+    "No retained cartridge cache after sessions"
+  ],
+  "abi": "x86_64",
+  "physicalControllerTested": false
+}

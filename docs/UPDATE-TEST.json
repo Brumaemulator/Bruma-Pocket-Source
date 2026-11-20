@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "method": "adb install -r, same package and debug certificate, same internal version 0.1.0/1",
+  "filesVerified": 37,
+  "saveAndPreferenceHashesUnchanged": true,
+  "device": "AOSP Android 15 x86_64 isolated emulator",
+  "physicalDeviceTested": false
+}

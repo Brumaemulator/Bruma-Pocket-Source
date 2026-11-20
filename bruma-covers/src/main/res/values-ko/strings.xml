@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="art_cancelled">다운로드 취소됨</string><string name="art_invalid">올바르지 않은 표지 응답</string><string name="art_network">표지 서비스를 사용할 수 없음</string><string name="art_not_found">일치하는 표지가 없음</string></resources>

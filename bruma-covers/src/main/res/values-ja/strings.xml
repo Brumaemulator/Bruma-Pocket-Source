@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="art_cancelled">ダウンロードをキャンセルしました</string><string name="art_invalid">カバーの応答が無効です</string><string name="art_network">カバーサービスを利用できません</string><string name="art_not_found">一致するカバーがありません</string></resources>

@@ -1,0 +1,27 @@
+BRUMA POCKET 1.0.0 — CORRESPONDING SOURCE, BUILD 6
+Copyright 2026 Bruma Studio. New frontend and adaptations: GPL-3.0-or-later.
+Derived components from BRUMA 1.0.3/46, commit c0f00eb36b0d1062da8882a617db71b007f836d9.
+
+mGBA 0.10.5 — mGBA authors and contributors; original per-file copyright notices retained, MPL-2.0.
+116 native compilation units; engine sources unchanged. See bundled source and MPL text.
+blip_buf 1.1.0 — Copyright 2003–2009 Shay Green, LGPL-2.1-or-later.
+inih — Copyright 2009 Ben Hoyt, BSD-3-Clause.
+Kotlin standard library 2.2.10 / JetBrains annotations 13.0 — Apache-2.0.
+Android NDK 28 runtime — libc++/LLVM/compiler-rt notices and exceptions in supplied NDK notices.
+Only linkcore is packaged as a native library. Android system libraries are not copied.
+No Google proprietary client SDK, Firebase, Billing, Integrity, LVL, Install Referrer SDK,
+TapTap SDK, ads, analytics, NDS core or RPG Maker runtime is included.
+
+Complete corresponding application/core sources and build instructions accompany this test APK.
+Rebuild with a modified blip_buf using the same open build recipe; no vendor key is needed to
+create and install your own test build. Preserve component notices and provide corresponding
+sources when distributing binaries. GPL does not grant rights to third-party artwork or brands.
+
+No commercial games, ROMs, BIOS files, Nintendo artwork or fonts are bundled in the app.
+Optional artwork comes from independent third-party services and remains its owners' property.
+Public distribution of the artwork feature requires a separate provider/rights review.
+This application is not affiliated with Nintendo. No warranty; see the license texts.
+
+Exact sources: https://github.com/Brumaemulator/Bruma-Pocket-Source/releases/tag/v1.0.0
+Privacy: https://brumastudio.netlify.app/bruma-pocket/privacidad
+No game files or third-party commercial artwork are distributed with this app.

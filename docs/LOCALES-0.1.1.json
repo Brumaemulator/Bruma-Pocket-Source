@@ -1,0 +1,16 @@
+{
+  "sameLanguagesAsBRUMA": [
+    "en",
+    "es",
+    "pt-BR",
+    "fr",
+    "de",
+    "it",
+    "ja",
+    "ko",
+    "zh-CN"
+  ],
+  "fullyTranslatedStringsPerLanguage": 105,
+  "manualSelector": true,
+  "default": "System language"
+}

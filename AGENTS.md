@@ -1,0 +1,2 @@
+# Bruma Pocket
+Independent Android GB/GBC/GBA application. Never modify BRUMA, its release snapshot, or BrumaOS. GPL-3.0-or-later frontend; mGBA 0.10.5 remains MPL-2.0, blip_buf LGPL-2.1+, inih BSD-3-Clause. No proprietary SDKs, ROMs, BIOS or Nintendo art. Independent package. Publication requires explicit user authorization; never upload APK/AAB or signing credentials to the source repository. Preserve source provenance and build exact sources.

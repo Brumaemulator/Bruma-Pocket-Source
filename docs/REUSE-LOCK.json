@@ -1,0 +1,75 @@
+{
+  "base": "BRUMA 1.0.3/46",
+  "commit": "c0f00eb36b0d1062da8882a617db71b007f836d9",
+  "files": {
+    "bruma-core\\src\\main\\java\\com\\linkcore\\emulator\\GameSurface.kt": {
+      "source": "app\\src\\main\\java\\com\\linkcore\\emulator\\GameSurface.kt",
+      "sha256": "42555e1704af7fe8e0b0a380e0f14791b77d92e00331dc0740fb44e19a8807d5",
+      "adaptedSha256": "f9186da2c30ba43e483f1f1b8bdb455ce091a12034bc458d0bd7d7c519c1021c",
+      "originalStillUnchanged": true,
+      "currentReleaseSha256": "9653130f443126e152226c3a59f2c51dad07a500314f975ee2751caaa771b0f9"
+    },
+    "bruma-core\\src\\main\\java\\com\\linkcore\\emulator\\FrameCadence.kt": {
+      "source": "app\\src\\main\\java\\com\\linkcore\\emulator\\FrameCadence.kt",
+      "sha256": "d103017fe6fbb92f12e8c9a7ebc7a0ba9c2004cc899448a298bef77321653422",
+      "adaptedSha256": "d103017fe6fbb92f12e8c9a7ebc7a0ba9c2004cc899448a298bef77321653422",
+      "originalStillUnchanged": true,
+      "currentReleaseSha256": "d103017fe6fbb92f12e8c9a7ebc7a0ba9c2004cc899448a298bef77321653422"
+    },
+    "bruma-core\\src\\main\\java\\com\\linkcore\\emulator\\SpeedAudio.kt": {
+      "source": "app\\src\\main\\java\\com\\linkcore\\emulator\\SpeedAudio.kt",
+      "sha256": "8a5444975820cb964d3b4a151e6d76c4f396117539b97d9dd9d1e6c1995b9936",
+      "adaptedSha256": "8a5444975820cb964d3b4a151e6d76c4f396117539b97d9dd9d1e6c1995b9936",
+      "originalStillUnchanged": true,
+      "currentReleaseSha256": "8a5444975820cb964d3b4a151e6d76c4f396117539b97d9dd9d1e6c1995b9936"
+    },
+    "bruma-core\\src\\main\\java\\com\\linkcore\\emulator\\NativeCore.kt": {
+      "source": "app\\src\\main\\java\\com\\linkcore\\emulator\\NativeCore.kt",
+      "sha256": "d41e24a8ff34ae8ebf2696dad8630b743f6c21a46738f2e7266b8d627538584a",
+      "adaptedSha256": "9169b71e544806cd3946f61ff884643e4eb91084a9de8601be013f0b348fe7ed",
+      "originalStillUnchanged": true,
+      "currentReleaseSha256": "9169b71e544806cd3946f61ff884643e4eb91084a9de8601be013f0b348fe7ed"
+    },
+    "bruma-input\\src\\main\\java\\com\\linkcore\\emulator\\GamepadInput.kt": {
+      "source": "app\\src\\main\\java\\com\\linkcore\\emulator\\GamepadInput.kt",
+      "sha256": "db395569c05a1916a8559aadb5478d8d614c3d55aa60c7615bc4cb452d92e24d",
+      "adaptedSha256": "394785505d12fcc650cc88dc2c5f742bfe4eee13b68f724ab10b0ae5140add5a",
+      "originalStillUnchanged": true,
+      "currentReleaseSha256": "a4461c698f8c78d406da0a2bf5777c2d3770a2f986bcfbf1ccd0493438d26c29"
+    },
+    "bruma-library\\src\\main\\java\\com\\linkcore\\emulator\\RomAccess.kt": {
+      "source": "app\\src\\main\\java\\com\\linkcore\\emulator\\RomAccess.kt",
+      "sha256": "ae9653266e57620499da49af530e58f66fc194ae1d35e3b4ba0c01a44d8a2da4",
+      "adaptedSha256": "ba0696c9c6e06397cc034917015a4b717ce816a75bfc8695f4ff001ec8d253aa",
+      "originalStillUnchanged": true,
+      "currentReleaseSha256": "ba0696c9c6e06397cc034917015a4b717ce816a75bfc8695f4ff001ec8d253aa"
+    },
+    "bruma-library\\src\\main\\java\\com\\linkcore\\emulator\\ArchiveCatalog.kt": {
+      "source": "app\\src\\main\\java\\com\\linkcore\\emulator\\ArchiveCatalog.kt",
+      "sha256": "c2fa4375c2ed4843dd5a947a1ed9651abcfd857932cdf0e27bac6d2ce79c5890",
+      "adaptedSha256": "eefba72d223069a4accf02238fd3e43cfc0b1c6647d70b3d798fc0e3975b4b45",
+      "originalStillUnchanged": true,
+      "currentReleaseSha256": "eefba72d223069a4accf02238fd3e43cfc0b1c6647d70b3d798fc0e3975b4b45"
+    },
+    "bruma-covers\\src\\main\\java\\com\\linkcore\\emulator\\LibretroClient.kt": {
+      "source": "app\\src\\main\\java\\com\\linkcore\\emulator\\LibretroClient.kt",
+      "sha256": "abc8142e7506725dc074fa1412f07c08d5f240c002d299c4c140333c74dacb77",
+      "adaptedSha256": "5bbb18279b1741f4540eac1e0e2d4854cc2b4e199e32650c5d7cb5aa55ead859",
+      "originalStillUnchanged": true,
+      "currentReleaseSha256": "1c00a456510e0d29e416c5f56c4dba485e6507448d1e7ddebfb766cc61f29668"
+    }
+  },
+  "mGBA": {
+    "version": "0.10.5",
+    "copiedFiles": 2418,
+    "modifiedEngineFiles": 0,
+    "treeInventory": "M-GBA-SOURCE-HASHES.json"
+  },
+  "bridge": {
+    "source": "app/src/main/cpp/native_bridge.cpp",
+    "originalSha256": "466e76b3cf593f8996abab4cc4580c736a5fdbb61044bd077817bc32bd351318",
+    "adaptedSha256": "f617f2f26192ac1bee34898249655013f10c1de92b0195749c37a27b37c76fd4",
+    "changes": "Added save/load state entry points and atomic state backups. No emulator algorithm changes."
+  },
+  "release": "Pocket 1.0.0/6"
+}
