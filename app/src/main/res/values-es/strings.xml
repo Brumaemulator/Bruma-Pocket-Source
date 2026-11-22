@@ -59,7 +59,7 @@
   <string name="paused">En pausa</string>
   <string name="pause">Menú</string>
   <string name="continue_game">Continuar</string>
-  <string name="exit_game">Guardar y volver</string>
+  <string name="exit_game">Volver a la biblioteca</string>
   <string name="save_state">Guardar estado</string>
   <string name="load_state">Cargar estado</string>
   <string name="slot">Ranura %d</string>
@@ -111,4 +111,7 @@
   <string name="legal_information">Información legal</string>
   <string name="source_code">Código fuente</string>
   <string name="full_policy">Política de privacidad completa</string>
+<string name="appearance">Apariencia</string>
+<string name="theme_light">Claro</string>
+<string name="theme_dark">Oscuro</string>
 </resources>

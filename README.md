@@ -1,6 +1,6 @@
-# Bruma Pocket 1.0.0
+# Bruma Pocket 1.0.1
 
-Independent Android application for GB, GBC and GBA. Package `com.brumastudio.pocket`, versionCode 6, minSdk 26, targetSdk 36, ARM64. Source distribution only: no APK/AAB, ROMs, BIOS, commercial artwork, accounts, SDK downloads or private keys.
+Independent Android application for GB, GBC and GBA. Package `com.brumastudio.pocket`, versionCode 7, minSdk 26, targetSdk 36, ARM64. Source distribution only: no APK/AAB, ROMs, BIOS, commercial artwork, accounts, SDK downloads or private keys.
 
 Frontend/adaptations: GPL-3.0-or-later. Engine mGBA 0.10.5: MPL-2.0, blip_buf: LGPL-2.1-or-later, inih: BSD-3-Clause; see LICENSE, NOTICE and docs/LICENCIAS.md for all notices and provenance. Original mGBA sources are unchanged.
 
@@ -14,7 +14,7 @@ Default ABI arm64-v8a. For an isolated emulator QA build only: `-PpocketAbis=x86
 
 ## Features
 
-GBA/GBC/GB filters, favorites, read-only folder access, ZIP import without retaining a second library, session-only extraction when a provider requires it, native mGBA emulation, adjustable portrait/landscape controls, controller mapping and fast-forward, nine UI languages, battery .sav import/export, auto/manual states and full Pocket backups. Raw .sav files require the exact same game/version; save states are not portable between engines. Save inside the game before exporting .sav.
+Selectable light/dark appearance including touch controls, GBA/GBC/GB filters, favorites, read-only folder access, ZIP import without retaining a second library, session-only extraction when a provider requires it, native mGBA emulation, adjustable portrait/landscape controls, controller mapping and fast-forward, nine UI languages, battery .sav import/export (in-game saves persist; pausing/exiting does not create or overwrite emulator states), manual save states and full Pocket backups. Raw .sav files require the exact same game/version; save states are not portable between engines. Save inside the game before exporting .sav.
 
 Cover downloads are optional and connect to Libretro/GitHub. No game or third-party artwork is bundled or hosted in this repository. Custom images can be selected locally. Artwork rights remain with their owners and are separate from code licenses. No account, analytics, billing, creator/referral client, advertising SDK or DRM.
 

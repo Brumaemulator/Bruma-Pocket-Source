@@ -32,13 +32,15 @@ class PlayerActivity:Activity(),SurfaceHolder.Callback {
  @Volatile private var fastForward=false;@Volatile private var fastMultiplier=2;@Volatile private var fastSound=false
  private var remapDialog:AlertDialog?=null
  private var resumeSession=false;private var sessionStart=0L;private var remap:Int?=null;private var shot:Bitmap?=null;private var destroyed=false
- override fun onCreate(b:Bundle?){super.onCreate(b)
+ override fun onCreate(b:Bundle?){PocketAppearance.apply(this);super.onCreate(b)
   store=LibraryStore(this);val found=store.read().find{it.key==intent.getStringExtra("id")};if(found==null){finish();return};game=found;activeOwner?.takeIf{it!==this}?.retire();activeOwner=this;saveManager=SaveManager(this);options=getSharedPreferences("pocket-options",0);fastSound=options.getBoolean("fastSound",false);resumeSession=intent.getBooleanExtra("resume",false)
   window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-  val frame=FrameLayout(this);frame.setBackgroundColor(Ui.ink);surface=GameSurface(this);controls=PocketControls(this).apply{gba=game.system=="GBA";onFastForward={toggleFastForward()}};frame.addView(surface,FrameLayout.LayoutParams(-1,-1));frame.addView(controls,FrameLayout.LayoutParams(-1,-1))
-  controls.addOnLayoutChangeListener{_,_,_,_,_,_,_,_,_->val region=GameLayout.viewport(controls.width,controls.height,resources.displayMetrics.density);controls.screenRegion=region}
-  frame.setOnApplyWindowInsetsListener{v,i->v.setPadding(i.systemWindowInsetLeft,0,i.systemWindowInsetRight,i.systemWindowInsetBottom);i}
-  val menu=Ui.button(this,getString(R.string.pause),false){if(controls.editing){controls.editing=false;controls.clearKeys();updateTouchVisibility();userPaused=false;startGame()}else pauseGame()};frame.addView(menu,FrameLayout.LayoutParams(Ui.dp(this,92),Ui.dp(this,42)).apply{leftMargin=Ui.dp(this@PlayerActivity,12);topMargin=Ui.dp(this@PlayerActivity,12)})
+  val frame=FrameLayout(this);frame.setBackgroundColor(Look.bg);surface=GameSurface(this);controls=PocketControls(this).apply{gba=game.system=="GBA";onFastForward={toggleFastForward()}};frame.addView(surface,FrameLayout.LayoutParams(-1,-1));frame.addView(controls,FrameLayout.LayoutParams(-1,-1))
+  controls.addOnLayoutChangeListener{_,_,_,_,_,_,_,_,_->val region=GameLayout.viewport(controls.width,controls.height,resources.displayMetrics.density,if(game.system=="GBA")1.5f else 160f/144f);controls.screenRegion=region}
+  window.statusBarColor=Look.bg;window.navigationBarColor=Look.bg
+  if(android.os.Build.VERSION.SDK_INT>=28)window.attributes=window.attributes.apply{layoutInDisplayCutoutMode=WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES}
+  frame.setOnApplyWindowInsetsListener{_,i->i}
+  val menu=Ui.button(this,getString(R.string.pause),false){if(controls.editing){controls.editing=false;controls.clearKeys();updateTouchVisibility();userPaused=false;startGame()}else pauseGame()};Ui.panel(menu,0xff171c29.toInt(),16);menu.setTextColor(0xffe2e5ed.toInt());frame.addView(menu,FrameLayout.LayoutParams(Ui.dp(this,92),Ui.dp(this,42)).apply{leftMargin=Ui.dp(this@PlayerActivity,12);topMargin=Ui.dp(this@PlayerActivity,12)})
   loading=Ui.text(this,getString(R.string.loading_game),16,Ui.sage).apply{gravity=Gravity.CENTER};frame.addView(loading,FrameLayout.LayoutParams(-1,Ui.dp(this,64),Gravity.CENTER));setContentView(frame);surface.holder.addCallback(this)
   gamepad=GamepadInput(this,{action->if(action==GamepadInput.PAUSE)pauseGame()else toggleFastForward()},{controls.clearKeys()},{connected->controllerConnected=connected;updateTouchVisibility()})
   Thread({try{val file=RomAccess.open(this,game);if(file.nameWithoutExtension!=game.key){RomAccess.release(file);error("Game source changed")};runOnUiThread{if(destroyed||retired||activeOwner!==this){RomAccess.release(file)}else{rom=file;busy=false;startGame()}}}catch(e:Exception){runOnUiThread{if(!destroyed&&!retired&&activeOwner===this){busy=false;loading.visibility=View.GONE;AlertDialog.Builder(this).setMessage(if(e.message=="Game source changed")R.string.source_changed else R.string.no_game).setPositiveButton(R.string.ok){_,_->finish()}.setOnCancelListener{finish()}.show()}}}},"Pocket-open").start()
@@ -50,7 +52,8 @@ class PlayerActivity:Activity(),SurfaceHolder.Callback {
  private fun toast(s:String){Toast.makeText(this,s,Toast.LENGTH_SHORT).show()}
  private fun showError(s:String){Ui.message(this,s)}
  private fun localizedError(e:Exception)=e.message
- private fun saveProgress(){if(!loaded)return;var ok=NativeCore.save();ok=NativeCore.saveState(saveManager.state(game.key,0).path)&&ok;if(!ok)toast(getString(R.string.save_failed));if(sessionStart!=0L){store.played(game.key,(android.os.SystemClock.elapsedRealtime()-sessionStart)/1000);sessionStart=0}}
+ // Flush only the game battery save; pause/back never creates an emulator snapshot.
+ private fun saveProgress(){if(!loaded)return;val ok=NativeCore.save();if(!ok)toast(getString(R.string.save_failed));if(sessionStart!=0L){store.played(game.key,(android.os.SystemClock.elapsedRealtime()-sessionStart)/1000);sessionStart=0}}
  private fun pauseGame(){if(!::gamepad.isInitialized||busy)return;userPaused=true;stopGame();saveProgress()
   val choices=intArrayOf(R.string.continue_game,R.string.save_state,R.string.load_state,R.string.speed,R.string.controls,R.string.controller_map,R.string.screenshot,R.string.exit_game)
   AlertDialog.Builder(this).setTitle(game.title).setItems(choices.map{getString(it)}.toTypedArray()){_,i->when(i){0->{userPaused=false;startGame()};1->slots(false);2->slots(true);3->speed();4->touchSettings();5->mapping();6->capture();7->finish()}}.setOnCancelListener{userPaused=false;startGame()}.show()
@@ -58,7 +61,7 @@ class PlayerActivity:Activity(),SurfaceHolder.Callback {
  private fun slots(load:Boolean){AlertDialog.Builder(this).setTitle(if(load)R.string.load_state else R.string.save_state).setItems((1..4).map{getString(R.string.slot,it)+(if(saveManager.state(game.key,it).exists())" ✓"else"")}.toTypedArray()){_,index->
   val file=saveManager.state(game.key,index+1)
   if(load){if(!file.exists()){toast(getString(R.string.empty_slot));pauseGame()}else{val ok=NativeCore.loadState(file.path);toast(getString(if(ok)R.string.saved else R.string.error));if(ok){surface.clearPending();userPaused=false;startGame()}else pauseGame()}}
-  else{toast(getString(if(NativeCore.saveState(file.path))R.string.saved else R.string.save_failed));pauseGame()}
+  else{val ok=NativeCore.saveState(file.path);if(ok)NativeCore.saveState(saveManager.state(game.key,0).path);toast(getString(if(ok)R.string.saved else R.string.save_failed));pauseGame()}
  }.setNegativeButton(R.string.back){_,_->pauseGame()}.setOnCancelListener{pauseGame()}.show()}
  private fun speed(){val ids=intArrayOf(R.string.normal_speed,R.string.double_speed,R.string.quad_speed);AlertDialog.Builder(this).setTitle(R.string.speed).setView(Switch(this).apply{setText(R.string.fast_sound);isChecked=fastSound;setPadding(32,8,32,8);setOnCheckedChangeListener{_,enabled->fastSound=enabled;options.edit().putBoolean("fastSound",enabled).apply()}}).setItems(ids.map{getString(it)}.toTypedArray()){_,i->fastForward=i!=0;fastMultiplier=if(i==2)4 else 2;controls.fastForwardActive=fastForward;userPaused=false;startGame()}.setOnCancelListener{pauseGame()}.show()}
  private fun touchSettings(){val p=getSharedPreferences("pocket-controls",0);val box=Ui.column(this);box.setPadding(24,12,24,12)
@@ -97,11 +100,11 @@ class PlayerActivity:Activity(),SurfaceHolder.Callback {
                     val error = NativeCore.load(file.path, File(saves, game.key + ".sav").path)
                     check(error == null) { error ?: getString(R.string.no_game) }
                     loaded = true
-                    if((resumeSession || options.getBoolean("autoResume",true)) && saveManager.state(game.key,0).exists()) {
+                    if(resumeSession && saveManager.state(game.key,0).exists()) {
                         if(!NativeCore.loadState(saveManager.state(game.key,0).path))runOnUiThread{toast(getString(R.string.error))}
                     }
                     surface.fillScreen=options.getBoolean("stretch",false)
-                    surface.integerScaling=options.getBoolean("integer",false)
+                    surface.integerScaling=false
                     runOnUiThread { if (!isDestroyed && !retired && activeOwner===this){loading.visibility=View.GONE;rememberGame()} }
                 }
                 val format = AudioFormat.Builder().setSampleRate(48000)

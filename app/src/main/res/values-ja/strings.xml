@@ -59,7 +59,7 @@
   <string name="paused">一時停止中</string>
   <string name="pause">メニュー</string>
   <string name="continue_game">再開</string>
-  <string name="exit_game">保存して戻る</string>
+  <string name="exit_game">ライブラリに戻る</string>
   <string name="save_state">ステートを保存</string>
   <string name="load_state">ステートを読み込む</string>
   <string name="slot">スロット %d</string>
@@ -111,4 +111,7 @@
   <string name="legal_information">法的情報</string>
   <string name="source_code">ソースコード</string>
   <string name="full_policy">プライバシーポリシー全文</string>
+<string name="appearance">外観</string>
+<string name="theme_light">ライト</string>
+<string name="theme_dark">ダーク</string>
 </resources>

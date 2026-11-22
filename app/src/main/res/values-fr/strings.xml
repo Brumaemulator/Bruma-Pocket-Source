@@ -59,7 +59,7 @@
   <string name="paused">En pause</string>
   <string name="pause">Menu</string>
   <string name="continue_game">Continuer</string>
-  <string name="exit_game">Enregistrer et revenir</string>
+  <string name="exit_game">Retour à la bibliothèque</string>
   <string name="save_state">Sauvegarder un état</string>
   <string name="load_state">Charger un état</string>
   <string name="slot">Emplacement %d</string>
@@ -111,4 +111,7 @@
   <string name="legal_information">Informations légales</string>
   <string name="source_code">Code source</string>
   <string name="full_policy">Politique de confidentialité complète</string>
+<string name="appearance">Apparence</string>
+<string name="theme_light">Clair</string>
+<string name="theme_dark">Sombre</string>
 </resources>

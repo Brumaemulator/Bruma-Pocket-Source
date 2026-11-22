@@ -59,7 +59,7 @@
   <string name="paused">일시 정지</string>
   <string name="pause">메뉴</string>
   <string name="continue_game">계속</string>
-  <string name="exit_game">저장 후 돌아가기</string>
+  <string name="exit_game">라이브러리로 돌아가기</string>
   <string name="save_state">상태 저장</string>
   <string name="load_state">상태 불러오기</string>
   <string name="slot">슬롯 %d</string>
@@ -111,4 +111,7 @@
   <string name="legal_information">법적 정보</string>
   <string name="source_code">소스 코드</string>
   <string name="full_policy">개인정보처리방침 전문</string>
+<string name="appearance">화면 테마</string>
+<string name="theme_light">라이트</string>
+<string name="theme_dark">다크</string>
 </resources>

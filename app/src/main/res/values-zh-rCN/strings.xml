@@ -59,7 +59,7 @@
   <string name="paused">已暂停</string>
   <string name="pause">菜单</string>
   <string name="continue_game">继续</string>
-  <string name="exit_game">保存并返回</string>
+  <string name="exit_game">返回游戏库</string>
   <string name="save_state">保存即时状态</string>
   <string name="load_state">读取即时状态</string>
   <string name="slot">栏位 %d</string>
@@ -111,4 +111,7 @@
   <string name="legal_information">法律信息</string>
   <string name="source_code">源代码</string>
   <string name="full_policy">完整隐私政策</string>
+<string name="appearance">外观</string>
+<string name="theme_light">浅色</string>
+<string name="theme_dark">深色</string>
 </resources>

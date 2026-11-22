@@ -59,7 +59,7 @@
   <string name="paused">Pausiert</string>
   <string name="pause">Menü</string>
   <string name="continue_game">Fortsetzen</string>
-  <string name="exit_game">Speichern und zurück</string>
+  <string name="exit_game">Zur Bibliothek</string>
   <string name="save_state">Zustand speichern</string>
   <string name="load_state">Zustand laden</string>
   <string name="slot">Slot %d</string>
@@ -111,4 +111,7 @@
   <string name="legal_information">Rechtliche Informationen</string>
   <string name="source_code">Quellcode</string>
   <string name="full_policy">Vollständige Datenschutzerklärung</string>
+<string name="appearance">Design</string>
+<string name="theme_light">Hell</string>
+<string name="theme_dark">Dunkel</string>
 </resources>

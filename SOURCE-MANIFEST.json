@@ -1,8 +1,8 @@
 {
   "format": 1,
   "package": "com.brumastudio.pocket",
-  "versionName": "1.0.0",
-  "versionCode": 6,
+  "versionName": "1.0.1",
+  "versionCode": 7,
   "signing": "No keys included; rebuild with your own debug/release signing key",
   "excluded": "Generated diagnostic ROM binaries, unused upstream desktop/test artwork, caches, SDKs, private keys and local paths",
   "files": [
@@ -18,7 +18,7 @@
     },
     {
       "path": "app/build.gradle.kts",
-      "sha256": "355e8a67b25742679a0f4d47003e156325f22255b63d4d4c127d8f35f3fcc3a7",
+      "sha256": "a82e0d78a5c4cf45429ef5076bd0a9fd84a4a5e7269fc89a168f2aa95a0ab6a3",
       "bytes": 1579
     },
     {
@@ -93,18 +93,23 @@
     },
     {
       "path": "app/src/main/java/com/brumastudio/pocket/DetailActivity.kt",
-      "sha256": "2d11d4d0c322e8e7ce69c8ff54c6a0bceec6957f0bb2d5c976f2a56e392ae480",
-      "bytes": 5871
+      "sha256": "9ebca3140b9529ecb6be3462665ccc7af7ee19a5c7532f10497d8691447c69e3",
+      "bytes": 6042
     },
     {
       "path": "app/src/main/java/com/brumastudio/pocket/MainActivity.kt",
-      "sha256": "6b472560acdb45d0458b7a98026cd7befcc626b3ce87d4eb1d64d171dd6a8e99",
-      "bytes": 12806
+      "sha256": "42f1bb219aa5409f84fead01e2a044a5002460d9baa9d7d248c0e88460ce23a8",
+      "bytes": 13004
     },
     {
       "path": "app/src/main/java/com/brumastudio/pocket/PlayerActivity.kt",
-      "sha256": "fef455222eee991fb1bef884de46bb30ae27c9b072b89f682733bfe2b5a5943d",
-      "bytes": 19584
+      "sha256": "8f38ba0edc496b337c5028db4f6a3e84ece3ad344e50c6dff320b7d834b05605",
+      "bytes": 19910
+    },
+    {
+      "path": "app/src/main/java/com/brumastudio/pocket/PocketAppearance.kt",
+      "sha256": "6c106c83b6ed75f6052e0873125929f5c874523d988e03b6cde0019b604b6c07",
+      "bytes": 859
     },
     {
       "path": "app/src/main/java/com/brumastudio/pocket/PocketLocale.kt",
@@ -113,13 +118,13 @@
     },
     {
       "path": "app/src/main/java/com/brumastudio/pocket/SettingsActivity.kt",
-      "sha256": "9e043f69d1c869fbeaad19564a198d1402de79823869748eef15124e1c2d03d1",
-      "bytes": 4741
+      "sha256": "e8728faf857ac2f893c4c2b9ba07448ded7df6f791be859364b3079b468a795c",
+      "bytes": 4547
     },
     {
       "path": "app/src/main/java/com/brumastudio/pocket/Ui.kt",
-      "sha256": "8c90b52d933a595b9d6cc7f4420a301eea5b9916e4e7e0b538cb15ed14691139",
-      "bytes": 5300
+      "sha256": "896b410424d14574e2034d5969a1eaaf2dde90b243d2a5ae6e1b44ebcede5012",
+      "bytes": 5642
     },
     {
       "path": "app/src/main/res/drawable/pocket_icon.xml",
@@ -128,48 +133,48 @@
     },
     {
       "path": "app/src/main/res/values/strings.xml",
-      "sha256": "f814873b920e1da2f28bf0e66d2c91490fcb3d32d3258fc5818c6a560e78b54a",
-      "bytes": 8006
+      "sha256": "f31719651acf228817c59b5d6d21bc8f804bbb4cf92de05795951a752837a54d",
+      "bytes": 8137
     },
     {
       "path": "app/src/main/res/values/styles.xml",
-      "sha256": "defbb6573e33993de9d7caba3efb0d59ad838dee9a1603f3de820de078118483",
-      "bytes": 426
+      "sha256": "89396377044f743cced1d1b383eb365897e5b80e374ed2259033f6733945f3f5",
+      "bytes": 823
     },
     {
       "path": "app/src/main/res/values-de/strings.xml",
-      "sha256": "a8f8c328bb3d8dd92abc3519d5e085b42c46a9f66a9176d7907a83f0e6da2652",
-      "bytes": 8730
+      "sha256": "afa12eae757cd65a84d4c451bf27d75f529339a89ea1a361d561575a19fec9b2",
+      "bytes": 8851
     },
     {
       "path": "app/src/main/res/values-es/strings.xml",
-      "sha256": "4815dc275eff258c73ca8a1fa5109741317bede14ea456877bd07e2cbf0077c1",
-      "bytes": 8570
+      "sha256": "9274b30fa537723e2816a939b41cef8b97bd5b827cc1d8b718518a5bb3a7eb95",
+      "bytes": 8709
     },
     {
       "path": "app/src/main/res/values-fr/strings.xml",
-      "sha256": "0925375418a5e120d95caa4e2658a8b91b133a6d83a09f808f0e3a50cad48a08",
-      "bytes": 8769
+      "sha256": "675e28c6b5bdf8cdc3510a8ec4ff706b1242c7d2da2cfa95229864d1594cecf8",
+      "bytes": 8905
     },
     {
       "path": "app/src/main/res/values-it/strings.xml",
-      "sha256": "5d05b1c06172728af39d6ebf77e66866023863907a56d01c3a9c8c4050354d81",
-      "bytes": 8366
+      "sha256": "26d7d31dd816e78490baee2164fc50a2a9e76f0af62a65ae66997929ee92cdf5",
+      "bytes": 8493
     },
     {
       "path": "app/src/main/res/values-ja/strings.xml",
-      "sha256": "379da9fe0066bff05e026931c0c6b53f185f5038be2a2a1c79dc652a249ab65d",
-      "bytes": 9717
+      "sha256": "becd5f0c7da9778515ec9cff8f7170faf41d2ae2eb98ac8dd98c9d3a89b29813",
+      "bytes": 9859
     },
     {
       "path": "app/src/main/res/values-ko/strings.xml",
-      "sha256": "db1e9f7ff9ecba419bd2bc1a72bdc7364c64fef9aaf144ad32be24042052da02",
-      "bytes": 9001
+      "sha256": "629abfcb5e81896b2acfbe92d251d44493e9b31277aea4e98e3fb04c053fe167",
+      "bytes": 9149
     },
     {
       "path": "app/src/main/res/values-pt-rBR/strings.xml",
-      "sha256": "1c16c452782deb686b07ba60db265775d052804e8b02e76397940a6ef26d571c",
-      "bytes": 8357
+      "sha256": "0b9fd11b8d017167693a415eef1f9a791201da51dffb45e4c7a5b783df73de70",
+      "bytes": 8495
     },
     {
       "path": "app/src/main/res/values-v27/styles.xml",
@@ -178,8 +183,8 @@
     },
     {
       "path": "app/src/main/res/values-zh-rCN/strings.xml",
-      "sha256": "39acd961c95b75745c4d3f290dd4ed6e18f3b9d43ddb69554c486fd0ca7ba572",
-      "bytes": 7836
+      "sha256": "71730e79aaf711ac98e9a00755a21726b072ab8d5b75c7d056f56c3f704630f1",
+      "bytes": 7966
     },
     {
       "path": "app/src/main/res/xml/data_extraction_rules.xml",
@@ -7873,12 +7878,12 @@
     },
     {
       "path": "bruma-core/src/main/java/com/linkcore/emulator/GameSurface.kt",
-      "sha256": "9653130f443126e152226c3a59f2c51dad07a500314f975ee2751caaa771b0f9",
-      "bytes": 7176
+      "sha256": "d37f1ec0ecb5aa82ca6dd2d4ede9f8515496e6773b9dcc1413b7d3b5c710917e",
+      "bytes": 8311
     },
     {
       "path": "bruma-core/src/main/java/com/linkcore/emulator/Look.kt",
-      "sha256": "0f727fbd0000dc28071444c1795edd4c2232acf0e4db083c6f13721672c3401a",
+      "sha256": "3284684da6d329941d9c005ca088cd445a6a825fdbf1251cf29c80f3f62b27d6",
       "bytes": 74
     },
     {
@@ -7968,8 +7973,8 @@
     },
     {
       "path": "bruma-input/src/main/java/com/linkcore/emulator/PocketControls.kt",
-      "sha256": "f7ee7c28017f3cc5330dcb2d11e5f6a456d489b0114b44ca7ddee61207da1ad5",
-      "bytes": 7140
+      "sha256": "2b703314f2565cd308ff00c93db8f301894070c3912f6b935527091a1c248281",
+      "bytes": 7590
     },
     {
       "path": "bruma-library/build.gradle.kts",
@@ -8102,6 +8107,11 @@
       "bytes": 2636
     },
     {
+      "path": "docs/RELEASE-1.0.1.md",
+      "sha256": "6af44035fdf2782bd64381850436a29170bbbc8786bf145778aee72c2c806421",
+      "bytes": 1435
+    },
+    {
       "path": "docs/REUSE-LOCK.json",
       "sha256": "627406ca93074882e6d96fbd93f6baca277b90a6fa7806cccd683c857fb4f7b2",
       "bytes": 4537
@@ -8158,8 +8168,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "378a943d4f1a799ba79ea749659a67a9041d49e0c9cfd6fc831e155dee8df7c1",
-      "bytes": 3377
+      "sha256": "9b5f20d67a5cfbc4ab251a6414d429ada2f9acef617415d7e10dab84147cb05a",
+      "bytes": 3522
     },
     {
       "path": "settings.gradle.kts",
@@ -8178,8 +8188,8 @@
     },
     {
       "path": "tools/package-source.py",
-      "sha256": "d2ab9a689696ec8ab55c852c7d446d8118408c03237f18f4537a81132b06c783",
-      "bytes": 2715
+      "sha256": "de13141b85ba63fe88af9170a69440ade1e88f625ea134c7d346235611a6d290",
+      "bytes": 2926
     }
   ]
 }

@@ -20,17 +20,21 @@ object GameLayout {
         if(integer&&fit>=1){left=kotlin.math.floor(left);top=kotlin.math.floor(top)}
         return RectF(left,top,left+width,top+height)
     }
-    fun viewport(w:Int,h:Int,d:Float):RectF {
+    fun viewport(w:Int,h:Int,d:Float,aspect:Float=1.5f):RectF {
         if(h<=w) return RectF(0f,0f,w.toFloat(),h.toFloat())
-        val margin=12*d
-        val screenHeight=(w-2*margin)*.9f
-        val top=maxOf(64*d,(h-screenHeight-300*d)/2)
+        val margin=3*d
+        val screenHeight=minOf((w-2*margin)/aspect,maxOf(1f,h-minOf(64*d,h*.12f)-220*d))
+        val top=maxOf(minOf(64*d,h*.12f),(h-screenHeight-300*d)/2)
         return RectF(margin,top,w-margin,top+screenHeight)
     }
 }
 
 class GameSurface(context: Context) : SurfaceView(context) {
     private val paint=Paint().apply {isFilterBitmap=false}
+    private val powerPaint=Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        typeface=Typeface.create("sans-serif-medium",Typeface.NORMAL)
+    }
+    private val bezelPaint=Paint(Paint.ANTI_ALIAS_FLAG).apply {style=Paint.Style.STROKE;color=0xff3e4656.toInt()}
     @Volatile var fillScreen=false
     @Volatile var integerScaling=false
     @Volatile private var gameWidth=240
@@ -123,9 +127,22 @@ class GameSurface(context: Context) : SurfaceView(context) {
         val canvas=holder.lockHardwareCanvas() ?: return
         try {
             canvas.drawColor(Look.bg)
-            val region=GameLayout.viewport(canvas.width,canvas.height,resources.displayMetrics.density)
+            val region=GameLayout.viewport(canvas.width,canvas.height,resources.displayMetrics.density,bitmap.width.toFloat()/bitmap.height)
             val destination=GameLayout.destination(region,bitmap.width,bitmap.height,integerScaling,fillScreen)
             canvas.drawBitmap(bitmap,Rect(0,0,bitmap.width,bitmap.height),destination,paint)
+            if(canvas.height>canvas.width) {
+                val density=resources.displayMetrics.density
+                bezelPaint.strokeWidth=2*density
+                val bezel=RectF(destination).apply{inset(-density,-density)}
+                canvas.drawRoundRect(bezel,4*density,4*density,bezelPaint)
+                val powerY=bezel.top-18*density
+                val powerX=30*density
+                powerPaint.color=0xff85e3c2.toInt()
+                canvas.drawCircle(powerX,powerY,3*density,powerPaint)
+                powerPaint.color=0xffb7bbc7.toInt()
+                powerPaint.textSize=9*density
+                canvas.drawText("POWER",powerX+11*density,powerY-(powerPaint.ascent()+powerPaint.descent())/2,powerPaint)
+            }
         } finally {holder.unlockCanvasAndPost(canvas)}
     }
 }

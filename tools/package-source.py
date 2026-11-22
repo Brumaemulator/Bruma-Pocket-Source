@@ -1,9 +1,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Package exact rebuildable Android sources; omit games, keys, caches and unused artwork."""
 from pathlib import Path
-import zipfile,hashlib,json,sys
+import zipfile,hashlib,json,sys,re
 root=Path(__file__).resolve().parents[1]
-target=Path(sys.argv[1]) if len(sys.argv)>1 else root/'releases/1.0.0/Bruma-Pocket-1.0.0-Corresponding-Source.zip'
+build=(root/'app/build.gradle.kts').read_text(encoding='utf-8')
+version=re.search(r'versionName\s*=\s*"([^"]+)"',build).group(1)
+code=int(re.search(r'versionCode\s*=\s*(\d+)',build).group(1))
+target=Path(sys.argv[1]) if len(sys.argv)>1 else root/f'releases/{version}/Bruma-Pocket-{version}-Corresponding-Source.zip' 
 target.parent.mkdir(parents=True,exist_ok=True)
 root_files={'AGENTS.md','README.md','LICENSE','NOTICE','.gitignore','build.gradle.kts','settings.gradle.kts','gradle.properties','gradlew','gradlew.bat'}
 root_dirs={'app','bruma-core','bruma-library','bruma-input','bruma-covers','bruma-saves','gradle','docs','tools'}
@@ -22,7 +25,7 @@ for p in sorted(root.rglob('*')):
  if p.suffix.lower()=='.jar' and rel.as_posix()!='gradle/wrapper/gradle-wrapper.jar':continue
  if p.name=='local.properties':continue
  files.append((p,rel))
-manifest={'format':1,'package':'com.brumastudio.pocket','versionName':'1.0.0','versionCode':6,'signing':'No keys included; rebuild with your own debug/release signing key' ,'excluded':'Generated diagnostic ROM binaries, unused upstream desktop/test artwork, caches, SDKs, private keys and local paths','files':[{'path':rel.as_posix(),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size} for p,rel in files]}
+manifest={'format':1,'package':'com.brumastudio.pocket','versionName':version,'versionCode':code,'signing':'No keys included; rebuild with your own debug/release signing key' ,'excluded':'Generated diagnostic ROM binaries, unused upstream desktop/test artwork, caches, SDKs, private keys and local paths','files':[{'path':rel.as_posix(),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size} for p,rel in files]}
 with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
  for p,rel in files:z.write(p,'BrumaPocket/'+rel.as_posix())
  z.writestr('BrumaPocket/SOURCE-MANIFEST.json',json.dumps(manifest,indent=2))

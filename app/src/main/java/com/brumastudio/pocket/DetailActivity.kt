@@ -8,10 +8,11 @@ import android.widget.*
 import com.linkcore.emulator.*
 import java.util.concurrent.Executors
 class DetailActivity:Activity(){
+ private var themeAtCreate=false
  override fun attachBaseContext(base:android.content.Context){super.attachBaseContext(PocketLocale.attach(base))}
  private lateinit var store:LibraryStore;private lateinit var game:LibraryGame;private val io=Executors.newSingleThreadExecutor();private var closed=false
- override fun onCreate(b:Bundle?){super.onCreate(b);store=LibraryStore(this);val found=store.read().find{it.key==intent.getStringExtra("id")};if(found==null){finish();return};game=found;draw()}
- override fun onResume(){super.onResume();if(::game.isInitialized)draw()}
+ override fun onCreate(b:Bundle?){PocketAppearance.apply(this);themeAtCreate=PocketAppearance.dark(this);super.onCreate(b);store=LibraryStore(this);val found=store.read().find{it.key==intent.getStringExtra("id")};if(found==null){finish();return};game=found;draw()}
+ override fun onResume(){super.onResume();if(themeAtCreate!=PocketAppearance.dark(this)){recreate();return};if(::game.isInitialized)draw()}
  private fun draw(){val outer=Ui.root(this);val head=Ui.row(this);head.addView(Ui.button(this,"‹",false){finish()});head.addView(Ui.text(this,getString(R.string.game_info),12,Ui.muted));outer.addView(head)
   val box=Ui.column(this);val scroll=ScrollView(this);scroll.addView(box);outer.addView(scroll,LinearLayout.LayoutParams(-1,0,1f));box.addView(Ui.space(this,16));box.addView(Ui.cover(this,game.key,game.system),LinearLayout.LayoutParams(-1,Ui.dp(this,240)));box.addView(Ui.space(this,18));box.addView(Ui.text(this,game.system,12,Ui.accent));box.addView(Ui.space(this,7));box.addView(Ui.text(this,game.title,27));box.addView(Ui.space(this,12));box.addView(Ui.text(this,getString(R.string.play_time,store.seconds(game.key)/60),14,Ui.muted));box.addView(Ui.text(this,getString(R.string.last_played,if(store.last(game.key)>0)java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM,java.text.DateFormat.SHORT,resources.configuration.locales[0]).format(java.util.Date(store.last(game.key)))else getString(R.string.never_played)),12,Ui.muted));box.addView(Ui.space(this,18))
   if(SaveManager(this).state(game.key,0).exists()){box.addView(Ui.button(this,getString(R.string.resume)){Ui.go(this,PlayerActivity::class.java,game.key,true)});box.addView(Ui.space(this,8))}

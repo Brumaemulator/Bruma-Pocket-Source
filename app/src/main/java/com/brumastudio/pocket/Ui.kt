@@ -11,16 +11,24 @@ object Ui {
  private val coverCache=object:android.util.LruCache<String,Bitmap>((Runtime.getRuntime().maxMemory()/1024/12).toInt().coerceIn(4096,24576)) { override fun sizeOf(key:String,value:Bitmap)=value.byteCount/1024 }
  private val coverWorker=java.util.concurrent.Executors.newFixedThreadPool(2)
 
- val bg=0xfff2f1ea.toInt();val ink=0xff20352b.toInt();val muted=0xff718074.toInt();val sage=0xffdce9d9.toInt();val accent=0xff447460.toInt();val lime=0xffd6ef82.toInt()
+ var dark=false
+ val bg get()=if(dark)0xff10161e.toInt()else 0xfff2f1ea.toInt()
+ val ink get()=if(dark)0xffe4ece9.toInt()else 0xff20352b.toInt()
+ val muted get()=if(dark)0xff9eafa9.toInt()else 0xff718074.toInt()
+ val sage get()=if(dark)0xff253530.toInt()else 0xffdce9d9.toInt()
+ val accent get()=if(dark)0xff8cc8ac.toInt()else 0xff447460.toInt()
+ val card get()=if(dark)0xff1b252d.toInt()else Color.WHITE
+ val lime=0xffd6ef82.toInt()
  fun dp(c:Context,n:Int)=(n*c.resources.displayMetrics.density).toInt()
  fun text(c:Context,s:CharSequence,size:Int=16,color:Int=ink)=TextView(c).apply{text=s;textSize=size.toFloat();setTextColor(color);includeFontPadding=false}
- fun panel(v:View,color:Int=android.graphics.Color.WHITE,radius:Int=22){v.background=GradientDrawable().apply{setColor(color);cornerRadius=dp(v.context,radius).toFloat()}}
- fun button(c:Context,s:String,filled:Boolean=true,action:()->Unit)=Button(c).apply{text=s;isAllCaps=false;minWidth=0;minimumWidth=0;stateListAnimator=null;textSize=14f;setTextColor(if(filled)android.graphics.Color.WHITE else ink);panel(this,if(filled)accent else sage,16);setPadding(dp(c,16),dp(c,10),dp(c,16),dp(c,10));setOnClickListener{if(android.animation.ValueAnimator.areAnimatorsEnabled()){animate().cancel();scaleX=.97f;scaleY=.97f;animate().scaleX(1f).scaleY(1f).setDuration(130).start()};action()}}
+ fun panel(v:View,color:Int=card,radius:Int=22){v.background=GradientDrawable().apply{setColor(color);cornerRadius=dp(v.context,radius).toFloat()}}
+ fun button(c:Context,s:String,filled:Boolean=true,action:()->Unit)=Button(c).apply{text=s;isAllCaps=false;minWidth=0;minimumWidth=0;stateListAnimator=null;textSize=14f;setTextColor(if(filled&&dark)0xff14271f.toInt()else if(filled)Color.WHITE else ink);panel(this,if(filled)accent else sage,16);setPadding(dp(c,16),dp(c,10),dp(c,16),dp(c,10));setOnClickListener{if(android.animation.ValueAnimator.areAnimatorsEnabled()){animate().cancel();scaleX=.97f;scaleY=.97f;animate().scaleX(1f).scaleY(1f).setDuration(130).start()};action()}}
  fun column(c:Context)=LinearLayout(c).apply{orientation=LinearLayout.VERTICAL}
  fun space(c:Context,h:Int)=View(c).apply{layoutParams=LinearLayout.LayoutParams(1,dp(c,h))}
  fun root(a:Activity):LinearLayout {
+  dark=PocketAppearance.dark(a)
   a.window.statusBarColor=bg;a.window.navigationBarColor=bg
-  a.window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+  a.window.decorView.systemUiVisibility=if(dark)0 else View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
   return column(a).apply{setBackgroundColor(bg);setPadding(dp(a,20),dp(a,8),dp(a,20),dp(a,12));setOnApplyWindowInsetsListener{v,i->v.setPadding(dp(a,20)+i.systemWindowInsetLeft,dp(a,8)+i.systemWindowInsetTop,dp(a,20)+i.systemWindowInsetRight,dp(a,12)+i.systemWindowInsetBottom);i};a.setContentView(this);requestApplyInsets()}
  }
  fun row(c:Context)=LinearLayout(c).apply{orientation=LinearLayout.HORIZONTAL;gravity=Gravity.CENTER_VERTICAL}
@@ -46,7 +54,7 @@ object Ui {
 }
 class PocketArt(c:Context,private val system:String):View(c){
  private val p=Paint(Paint.ANTI_ALIAS_FLAG)
- override fun onDraw(cv:Canvas){val w=width.toFloat();val h=height.toFloat();p.color=when(system){"GB"->0xffdce9d9.toInt();"GBC"->0xffe8dbec.toInt();else->0xffdce8ef.toInt()};cv.drawRoundRect(0f,0f,w,h,24f,24f,p)
+ override fun onDraw(cv:Canvas){val w=width.toFloat();val h=height.toFloat();p.color=if(Ui.dark)Ui.sage else when(system){"GB"->0xffdce9d9.toInt();"GBC"->0xffe8dbec.toInt();else->0xffdce8ef.toInt()};cv.drawRoundRect(0f,0f,w,h,24f,24f,p)
   val s=minOf(w,h)/11;p.color=Ui.accent
   for(y in 0..4)for(x in 0..4)if((x*3+y*2)%5<2)cv.drawRoundRect(w*.24f+x*s,h*.2f+y*s,s*.7f+w*.24f+x*s,s*.7f+h*.2f+y*s,s*.1f,s*.1f,p)
   p.color=Ui.ink;p.typeface=Typeface.create("sans-serif-medium",Typeface.NORMAL);p.textSize=minOf(w*.20f,54f);p.textAlign=Paint.Align.CENTER;cv.drawText(system,w/2,h*.78f,p)

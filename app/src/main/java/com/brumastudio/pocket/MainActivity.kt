@@ -10,12 +10,13 @@ import android.widget.*
 import com.linkcore.emulator.*
 import java.util.concurrent.Executors
 class MainActivity:Activity(){
+ private var themeAtCreate=false
  override fun attachBaseContext(base:Context){super.attachBaseContext(PocketLocale.attach(base))}
  private lateinit var store:LibraryStore;private var games=listOf<LibraryGame>();private var filter="GBA";private var query="";private var favorites=false
  private val io=Executors.newSingleThreadExecutor();private var scanTask:java.util.concurrent.Future<*>?=null;private var scanCanceled=java.util.concurrent.atomic.AtomicBoolean(false);private var scanGeneration=0;private var closed=false;private var scanning=false
  private lateinit var grid:GridView;private lateinit var count:TextView;private lateinit var adapter:BaseAdapter
- override fun onCreate(b:Bundle?){super.onCreate(b);store=LibraryStore(this);RomAccess.sweep(this);games=try{store.read()}catch(e:Exception){emptyList()};draw()}
- override fun onResume(){super.onResume();if(languageAtDraw!=PocketLocale.selectedTag(this)){recreate();return};if(::adapter.isInitialized){games=try{store.read()}catch(e:Exception){games};draw()}}
+ override fun onCreate(b:Bundle?){PocketAppearance.apply(this);themeAtCreate=PocketAppearance.dark(this);super.onCreate(b);store=LibraryStore(this);RomAccess.sweep(this);games=try{store.read()}catch(e:Exception){emptyList()};draw()}
+ override fun onResume(){super.onResume();if(themeAtCreate!=PocketAppearance.dark(this)){recreate();return};if(languageAtDraw!=PocketLocale.selectedTag(this)){recreate();return};if(::adapter.isInitialized){games=try{store.read()}catch(e:Exception){games};draw()}}
  private fun shown()=games.filter{(favorites||it.system==filter)&&(!favorites||store.favorite(it.key))&&it.title.contains(query,true)}
  private fun draw(){languageAtDraw=PocketLocale.selectedTag(this);val root=Ui.root(this);val head=Ui.row(this)
   val brand=Ui.text(this,"Bruma Pocket",26).apply{
@@ -29,7 +30,7 @@ class MainActivity:Activity(){
    card.addView(Ui.cover(this,g.key,g.system),LinearLayout.LayoutParams(Ui.dp(this,58),Ui.dp(this,60)))
    val copy=Ui.column(this);copy.setPadding(Ui.dp(this,12),0,Ui.dp(this,6),0);copy.addView(Ui.text(this,getString(R.string.continue_playing),11,Ui.accent));copy.addView(Ui.text(this,g.title,16).apply{maxLines=2});card.addView(copy,LinearLayout.LayoutParams(0,-2,1f));card.addView(Ui.button(this,"▶"){Ui.go(this,PlayerActivity::class.java,g.key,true)});root.addView(card);root.addView(Ui.space(this,10))
   }
-  val search=EditText(this).apply{hint=getString(R.string.search);setSingleLine();setText(query);textSize=15f;setPadding(Ui.dp(this@MainActivity,15),Ui.dp(this@MainActivity,8),Ui.dp(this@MainActivity,15),Ui.dp(this@MainActivity,8));Ui.panel(this,android.graphics.Color.WHITE,16);addTextChangedListener(object:TextWatcher{override fun beforeTextChanged(s:CharSequence?,st:Int,c:Int,a:Int){};override fun onTextChanged(s:CharSequence?,st:Int,b:Int,c:Int){query=s.toString();refresh()};override fun afterTextChanged(e:Editable?) {}})}
+  val search=EditText(this).apply{hint=getString(R.string.search);setSingleLine();setText(query);textSize=15f;setPadding(Ui.dp(this@MainActivity,15),Ui.dp(this@MainActivity,8),Ui.dp(this@MainActivity,15),Ui.dp(this@MainActivity,8));Ui.panel(this,Ui.card,16);setTextColor(Ui.ink);setHintTextColor(Ui.muted);addTextChangedListener(object:TextWatcher{override fun beforeTextChanged(s:CharSequence?,st:Int,c:Int,a:Int){};override fun onTextChanged(s:CharSequence?,st:Int,b:Int,c:Int){query=s.toString();refresh()};override fun afterTextChanged(e:Editable?) {}})}
   root.addView(search,LinearLayout.LayoutParams(-1,Ui.dp(this,48)));root.addView(Ui.space(this,10))
   val chips=Ui.row(this);for(s in listOf("GBA","GBC","GB")){val label=if(s.isBlank())getString(R.string.all)else s;chips.addView(Ui.button(this,label,!favorites&&filter==s){filter=s;favorites=false;draw()}.apply{setPadding(Ui.dp(this@MainActivity,6),0,Ui.dp(this@MainActivity,6),0)},LinearLayout.LayoutParams(0,Ui.dp(this,42),1f).apply{marginEnd=Ui.dp(this@MainActivity,6)})};chips.addView(Ui.button(this,if(favorites)"★"else"☆",favorites){favorites=!favorites;draw()}.apply{contentDescription=getString(R.string.favorites)},LinearLayout.LayoutParams(Ui.dp(this,44),Ui.dp(this,40)));root.addView(chips)
   count=Ui.text(this,getString(R.string.library_count,shown().size),11,Ui.muted);count.setPadding(0,Ui.dp(this,10),0,Ui.dp(this,9));root.addView(count)
